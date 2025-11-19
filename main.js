@@ -74,7 +74,8 @@ const contactAI = async (messageToSend) => {
 
   try {
     const bodyMessage = defaultMessage
-      ? `There is a university course called ${messageToSend}, tell me about the topic and it's practical uses.`
+      ? `There is a university course called ${messageToSend}, tell me about the topic and it's practical uses.
+      Don't talk about how the course is executed or what happens in the course.`
       : messageToSend;
     const options = {
       method: "POST",
@@ -134,6 +135,7 @@ const showData = () => {
       contactAI(course.name);
       defaultMessage = true;
       userInput.disabled = false;
+      userInput.placeholder = "";
       chatBox.scrollIntoView({ behavior: "smooth" });
     });
     card.appendChild(button);
