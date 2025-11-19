@@ -28,16 +28,24 @@ const filter = () => {
   if (!alpha && !credit) {
     sorted = false;
   }
-  if (alpha) {
+  if (alpha && credit) {
     sorted = true;
-    data = originalData.toSorted((a, b) => a.name.localeCompare(b.name));
+    data = originalData
+      .toSorted((a, b) => a.name.localeCompare(b.name))
+      .sort((a, b) => Number(b.credits) - Number(a.credits));
+  } else {
+    if (alpha) {
+      sorted = true;
+      data = originalData.toSorted((a, b) => a.name.localeCompare(b.name));
+    }
+    if (credit) {
+      sorted = true;
+      data = originalData.toSorted(
+        (a, b) => Number(b.credits) - Number(a.credits)
+      );
+    }
   }
-  if (credit) {
-    sorted = true;
-    data = originalData.toSorted(
-      (a, b) => Number(b.credits) - Number(a.credits)
-    );
-  }
+
   courseInfo.textContent = "";
   showData();
 };
